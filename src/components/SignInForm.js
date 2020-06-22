@@ -30,11 +30,11 @@ const SignInForm = ({ onSubmit }) => {
 
   const error = errorMessage ?
     <p className="error-message">{errorMessage}</p> :
-    <div class="error-placeholder" />
+    <div className="error-placeholder" />
 
   return (
     <>
-      <h2>Sign In</h2>
+      <h2>Welcome</h2>
       {loading ?
         <h4>loading...</h4> :
         <form className="Sign-in-form" onSubmit={handleSignInForm}>
