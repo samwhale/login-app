@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+
+
+import Home from './components/Home';
+import SignInForm from './components/SignInForm';
+import { signUserIn } from './utils/sign-in';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const handleSubmit = (username, password) => {
+    return signUserIn(username, password).then((user) => {
+      setUser(user)
+      setErrorMessage(null);
+    }).catch((error) => {
+      setErrorMessage(error.message);
+    });
+  }
+
+  const handleSignOut = () => {
+    setUser(null);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {user ?
+        <Home user={user} onSignOut={handleSignOut} /> :
+        <SignInForm
+          onSubmit={handleSubmit}
+          errorMessage={errorMessage}
+        />
+    }
     </div>
   );
 }
