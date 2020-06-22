@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { signUserIn } from '../utils/sign-in';
 
-const SignInForm = ({ errorMessage, onSubmit }) => {
+const SignInForm = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -17,7 +19,11 @@ const SignInForm = ({ errorMessage, onSubmit }) => {
     event.preventDefault();
     setLoading(true);
 
-    onSubmit(username, password).finally(() => {
+    signUserIn(username, password).then(user => {
+      onSubmit(user)
+    }).catch(error => {
+      setErrorMessage(error.message);
+    }).finally(() => {
       setLoading(false);
     });
   }
