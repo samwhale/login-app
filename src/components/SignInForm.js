@@ -39,8 +39,12 @@ const SignInForm = ({ onSubmit }) => {
         <h4>loading...</h4> :
         <form className="Sign-in-form" onSubmit={handleSignInForm}>
           {error}
-          <input type="text" value={username} onChange={handleUsernameChange} />
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          <label htmlFor="username">Username</label>
+          <input id="username" type="text" value={username} onChange={handleUsernameChange} />
+          
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" value={password} onChange={handlePasswordChange} />
+
           <button type="submit">Sign In</button>
         </form>
       }

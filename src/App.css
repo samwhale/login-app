@@ -17,6 +17,12 @@
   margin-bottom: 100px;
 }
 
+.Sign-in-form label {
+  align-self: flex-start;
+  margin-left: 16px;
+  font-size: 18px;
+}
+
 .Sign-in-form input {
   margin: 16px;
   height: 20px;
