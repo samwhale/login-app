@@ -14,12 +14,12 @@ describe('<SignInForm />', () => {
   let onSubmit = jest.fn();
 
   beforeEach(() => {
-    signUserIn.mockImplementation(() => Promise.resolve({
+    signUserIn.mockResolvedValue({
       statusCode: 200,
       user: {
         username: 'test'
       }
-    }));
+    });
     onSubmit.mockReset();
   })
 
@@ -35,10 +35,10 @@ describe('<SignInForm />', () => {
   });
 
   test('if SignIn shows an error when sign in fails', async () => {
-    signUserIn.mockImplementation(() => Promise.reject({
+    signUserIn.mockRejectedValue({
       statusCode: 400,
-      message: 'This failed dude!'
-    }));
+      message: 'This failed, oh no!!'
+    });
 
     const { getByText } = render(<SignInForm onSubmit={onSubmit} />);
 
@@ -47,7 +47,7 @@ describe('<SignInForm />', () => {
       await fireEvent.click(signInButton);
     });
 
-    expect(getByText('This failed dude!')).not.toBeNull();
+    expect(getByText('This failed, oh no!!')).not.toBeNull();
     expect(onSubmit).not.toHaveBeenCalled();
   });
 
