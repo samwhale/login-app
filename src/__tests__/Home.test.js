@@ -1,5 +1,6 @@
 import Home from '../components/Home';
 
 describe('<Home />', () => {
-  it.todo('should sign the user out');
+  test.todo('if Home displays the username');
+  test.todo('if clicking the button signs the user out');
 });
